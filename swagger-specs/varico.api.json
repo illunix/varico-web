@@ -1,0 +1,182 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Varico.Api",
+        "version": "1.0"
+    },
+    "paths": {
+        "/accounts/{accountReferenceId}/transactions": {
+            "post": {
+                "tags": [
+                    "Accounts"
+                ],
+                "operationId": "Create transaction",
+                "parameters": [
+                    {
+                        "name": "accountReferenceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateTransactionCommand"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/transactions/{transactionReferenceId}/category": {
+            "patch": {
+                "tags": [
+                    "Transactions"
+                ],
+                "operationId": "Change transaction category",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateTransactionCategoryCommand"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/transactions": {
+            "get": {
+                "tags": [
+                    "Transactions"
+                ],
+                "operationId": "Get transactions",
+                "parameters": [
+                    {
+                        "name": "accountReferenceId",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "category",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/TransactionDto"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AccountDto": {
+                "type": "object",
+                "properties": {
+                    "referenceId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "fullName": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CreateTransactionCommand": {
+                "type": "object",
+                "properties": {
+                    "category": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "TransactionDto": {
+                "type": "object",
+                "properties": {
+                    "referenceId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "account": {
+                        "$ref": "#/components/schemas/AccountDto"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "category": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "UpdateTransactionCategoryCommand": {
+                "type": "object",
+                "properties": {
+                    "category": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            }
+        }
+    }
+}
