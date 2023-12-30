@@ -1,0 +1,21 @@
+.container {
+    padding: 10em;
+}
+
+.justify-center {
+    display: flex;
+    justify-content: center;
+}
+
+.account-owner {
+    color: darkblue;
+}
+
+.account-owner:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.amount {
+    color: green;
+}

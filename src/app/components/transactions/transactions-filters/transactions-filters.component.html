@@ -1,1 +1,9 @@
-<p>transactions-filters works!</p>
+<mat-form-field>
+    <mat-label>Transaction category</mat-label>
+    <mat-select (selectionChange)="onCategoryChange($event)"> 
+        <mat-option>All</mat-option>
+        @for (category of transactionCategories(); track category) {
+            <mat-option [value]="category">{{ category }}</mat-option>
+        }
+    </mat-select>
+</mat-form-field>
