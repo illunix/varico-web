@@ -1,2 +1,18 @@
-html, body { height: 100%; }
+html, body { height: 100%; background-color: whitesmoke; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.amount {
+    color: green;
+}
+
+.justify-end .mat-grid-tile-content {
+    justify-content: end;
+}
+
+.justify-start .mat-grid-tile-content {
+    justify-content: start;
+}
+
+mat-form-field {
+    width: 100%;
+}

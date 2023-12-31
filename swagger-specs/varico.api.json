@@ -28,7 +28,83 @@
         }
       }
     },
-    "/accounts/{elo}/summary": {
+    "/accounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Get accounts",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccountDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountReferenceId}/transactions": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Create transaction",
+        "parameters": [
+          {
+            "name": "accountReferenceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTransactionCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountReferenceId}/summary": {
       "get": {
         "tags": [
           "Accounts"
@@ -36,12 +112,11 @@
         "operationId": "Get account summary",
         "parameters": [
           {
-            "name": "elo",
+            "name": "accountReferenceId",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "type": "string"
             }
           }
         ],
@@ -116,8 +191,7 @@
             "name": "accountReferenceId",
             "in": "query",
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "type": "string"
             }
           },
           {
@@ -167,8 +241,7 @@
             "in": "query",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "type": "string"
             }
           }
         ],
@@ -197,7 +270,7 @@
         "properties": {
           "referenceId": {
             "type": "string",
-            "format": "uuid"
+            "nullable": true
           },
           "fullName": {
             "type": "string",
@@ -212,6 +285,10 @@
           "fullName": {
             "type": "string",
             "nullable": true
+          },
+          "balance": {
+            "type": "number",
+            "format": "double"
           },
           "totalAmountSpent": {
             "type": "number",
@@ -232,7 +309,7 @@
         "properties": {
           "referenceId": {
             "type": "string",
-            "format": "uuid"
+            "nullable": true
           },
           "amount": {
             "type": "number",
@@ -245,6 +322,20 @@
           "createdAt": {
             "type": "string",
             "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateTransactionCommand": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
           }
         },
         "additionalProperties": false
@@ -328,15 +419,29 @@
         "type": "integer",
         "format": "int32"
       },
+      "TransactionAccountDto": {
+        "type": "object",
+        "properties": {
+          "referenceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "fullName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "TransactionDto": {
         "type": "object",
         "properties": {
           "referenceId": {
             "type": "string",
-            "format": "uuid"
+            "nullable": true
           },
           "account": {
-            "$ref": "#/components/schemas/AccountDto"
+            "$ref": "#/components/schemas/TransactionAccountDto"
           },
           "amount": {
             "type": "number",

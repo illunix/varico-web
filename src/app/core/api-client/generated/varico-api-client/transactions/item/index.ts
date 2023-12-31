@@ -4,10 +4,9 @@
 import { createExceptionResponseFromDiscriminatorValue, deserializeIntoExceptionResponse, serializeExceptionResponse, type ExceptionResponse } from '../../models/';
 import { CategoryRequestBuilder } from './category/';
 import { BaseRequestBuilder, HttpMethod, RequestInformation, type Parsable, type ParsableFactory, type RequestAdapter, type RequestConfiguration, type RequestOption } from '@microsoft/kiota-abstractions';
-import { type Guid } from 'guid-typescript';
 
 export interface WithTransactionReferenceItemRequestBuilderDeleteQueryParameters {
-    accountReferenceId?: Guid;
+    accountReferenceId?: string;
 }
 /**
  * Builds and executes requests for operations under /transactions/{transactionReferenceId}

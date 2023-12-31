@@ -5,7 +5,7 @@ import { createAccountSummaryDtoFromDiscriminatorValue, createExceptionResponseF
 import { BaseRequestBuilder, HttpMethod, RequestInformation, type Parsable, type ParsableFactory, type RequestAdapter, type RequestConfiguration, type RequestOption } from '@microsoft/kiota-abstractions';
 
 /**
- * Builds and executes requests for operations under /accounts/{elo}/summary
+ * Builds and executes requests for operations under /accounts/{accountReferenceId}/summary
  */
 export class SummaryRequestBuilder extends BaseRequestBuilder<SummaryRequestBuilder> {
     /**
@@ -14,7 +14,7 @@ export class SummaryRequestBuilder extends BaseRequestBuilder<SummaryRequestBuil
      * @param requestAdapter The request adapter to use to execute the requests.
      */
     public constructor(pathParameters: Record<string, unknown> | string | undefined, requestAdapter: RequestAdapter) {
-        super(pathParameters, requestAdapter, "{+baseurl}/accounts/{elo}/summary", (x, y) => new SummaryRequestBuilder(x, y));
+        super(pathParameters, requestAdapter, "{+baseurl}/accounts/{accountReferenceId}/summary", (x, y) => new SummaryRequestBuilder(x, y));
     }
     /**
      * @param requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.

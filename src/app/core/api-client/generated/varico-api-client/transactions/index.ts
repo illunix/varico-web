@@ -4,10 +4,9 @@
 import { createExceptionResponseFromDiscriminatorValue, createTransactionDtoFromDiscriminatorValue, deserializeIntoExceptionResponse, serializeExceptionResponse, type ExceptionResponse, type TransactionDto } from '../models/';
 import { WithTransactionReferenceItemRequestBuilder } from './item/';
 import { BaseRequestBuilder, getPathParameters, HttpMethod, RequestInformation, type Parsable, type ParsableFactory, type RequestAdapter, type RequestConfiguration, type RequestOption } from '@microsoft/kiota-abstractions';
-import { type Guid } from 'guid-typescript';
 
 export interface TransactionsRequestBuilderGetQueryParameters {
-    accountReferenceId?: Guid;
+    accountReferenceId?: string;
     category?: string;
 }
 /**

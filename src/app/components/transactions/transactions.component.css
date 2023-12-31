@@ -16,6 +16,12 @@
     cursor: pointer;
 }
 
-.amount {
-    color: green;
+.action-icon {
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.float-end {
+    display: flex;
+    justify-content: end;
 }

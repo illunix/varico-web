@@ -1,7 +1,9 @@
 <h1 mat-dialog-title>Account summary</h1>
 <div mat-dialog-content>
     <ng-container *ngIf="!isLoadingAccountSummary(); else spinner">
-        <table *ngIf="accountSummary()?.transactions!.length > 0; else noData" mat-table [dataSource]="accountSummary()?.transactions!" class="mat-elevation-z3">
+        <label><span>Balance: </span><span class="amount">{{ accountSummary()?.balance }} $</span></label>
+        <label><span>Total amount spent: </span><span class="spent">-{{ accountSummary()?.totalAmountSpent }} $</span></label>
+        <table *ngIf="accountSummary()?.transactions!.length > 0; else noData" mat-table [dataSource]="accountSummary()?.transactions!" class="mat-elevation-z3 mt">
             <ng-container matColumnDef="amount">
                 <th mat-header-cell *matHeaderCellDef>Amount</th>
                 <td mat-cell *matCellDef="let trans" class="amount">{{ trans.amount }} $</td>
@@ -32,6 +34,6 @@
         </div>
     </ng-template>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onClose()">Close</button>
+<div mat-dialog-actions align="end">
+    <button mat-button (click)="onClose()">Close</button>
 </div>
