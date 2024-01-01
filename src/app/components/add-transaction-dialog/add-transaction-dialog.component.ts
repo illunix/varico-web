@@ -25,7 +25,6 @@ export class AddTransactionDialogComponent implements OnInit {
   });
   public transactionCategories = signal<string[]>([]);
   public accounts = signal<AccountDto[]>([]);
-  public isSubmitted = false;
 
   public constructor(
     private _varicoApi: VaricoApiClient,
@@ -54,8 +53,6 @@ export class AddTransactionDialogComponent implements OnInit {
       return;
     }
     
-    this.isSubmitted = true;
-
     const cmd: CreateTransactionCommand = {
       category: this.f.category.value!,
       amount: this.f.amount.value!

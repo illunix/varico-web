@@ -1,1 +1,8 @@
-<p>remove-transaction-dialog works!</p>
+<h1 mat-dialog-title>Remove transaction</h1>
+<div mat-dialog-content>
+    <label>Are you sure you want delete this transaction?</label>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onClose()">Close</button>
+  <button mat-button (click)="onRemove()">Remove</button>
+</div>

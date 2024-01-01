@@ -32,8 +32,8 @@
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let trans">
-                    <mat-icon fontIcon="edit" class="action-icon" title="Change transaction category"></mat-icon>
-                    <mat-icon fontIcon="delete_forever" class="action-icon" title="Remove transaction"></mat-icon>
+                    <mat-icon fontIcon="edit" class="action-icon" title="Change transaction category" (click)="onOpenChangeTransactionDialog(trans.referenceId, trans.category)"></mat-icon>
+                    <mat-icon fontIcon="delete_forever" class="action-icon" title="Remove transaction" (click)="onOpenRemoveTransactionDialog(trans.referenceId)"></mat-icon>
                 </td>
             </ng-container>
         
