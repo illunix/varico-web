@@ -62,12 +62,13 @@ export class AddTransactionDialogComponent implements OnInit {
       await this._varicoApi.accounts.byAccountReferenceId(this.f.accountReferenceId.value!).transactions.post(cmd);
 
       this._snackBar.open('Successfully created transaction');
+
+      this._dialogRef.close(true);
     }
     catch {
       this._snackBar.open('Something went wrong while creating transaction');
-    }
-    finally {
-      this._dialogRef.close();
+
+      this._dialogRef.close(false);
     }
   }
 

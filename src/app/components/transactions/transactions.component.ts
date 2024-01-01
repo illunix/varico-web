@@ -57,6 +57,10 @@ export class TransactionsComponent implements OnInit {
     this._dialog.open(AddTransactionDialogComponent, {
       width: '400px',
       height: '500px'
+    }).afterClosed().subscribe(q => {
+      if (q) {
+        this.getTransactions(this.selectedCategory);
+      }
     });
   }
 
